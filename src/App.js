@@ -10,7 +10,7 @@ import styles from './App.module.css';
 class App extends Component {
   state = {
     images: [],
-    searchQuary: '',
+    searchQuary: "",
     currentPage: undefined,
     isLoading: false,
     error: false,
@@ -27,13 +27,13 @@ class App extends Component {
       try {
         this.setState({ isLoading: true });
         const result = await api(searchQuary, currentPage);
-        this.setState(prevState => ({
+        this.setState((prevState) => ({
           images: [...prevState.images, ...result.data.hits],
           isLoading: false,
         }));
         window.scrollTo({
           top: document.documentElement.scrollHeight,
-          behavior: 'smooth',
+          behavior: "smooth",
         });
       } catch {
         this.setState({
@@ -45,14 +45,14 @@ class App extends Component {
   }
 
   loadMore = () => {
-    this.setState(prevState => ({ currentPage: prevState.currentPage + 1 }));
+    this.setState((prevState) => ({ currentPage: prevState.currentPage + 1 }));
   };
 
-  onSubmit = quary => {
+  onSubmit = (quary) => {
     this.setState({ searchQuary: quary, currentPage: 1, images: [] });
   };
-  activeModal = image => {
-    this.setState(prevState => ({
+  toggleModal = (image) => {
+    this.setState((prevState) => ({
       showModal: !prevState.showModal,
       selectedImage: image,
     }));
@@ -63,9 +63,9 @@ class App extends Component {
     return (
       <div className={styles.App}>
         <Searchbar onSubmit={this.onSubmit}></Searchbar>
-        {error && <h2>Oops</h2>}
+        {error && <h2>Something wrong!!!</h2>}
         {showModal && (
-          <Modal activeModal={this.activeModal}>
+          <Modal toggleModal={this.toggleModal}>
             <img src={selectedImage.largeImageURL} alt={selectedImage.tags} />
           </Modal>
         )}
@@ -73,7 +73,7 @@ class App extends Component {
           <Loader />
         ) : (
           <ImageGallery
-            activeModal={this.activeModal}
+            toggleModal={this.toggleModal}
             showModal={showModal}
             images={images}
           ></ImageGallery>

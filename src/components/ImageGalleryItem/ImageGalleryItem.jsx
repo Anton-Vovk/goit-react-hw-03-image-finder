@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './ImageGalleryItem.module.css';
 
-const ImageGalleryItem = ({ previewURL, tags, activeModal }) => (
-  <li className={styles.ImageGallaryItem}>
+const ImageGalleryItem = ({ previewURL, tags, toggleModal }) => (
+  <li className={styles.ImageGalleryItem}>
     <img
-      className={styles.ImageGallaryItemImage}
-      onClick={activeModal}
+      onClick={toggleModal}
       src={previewURL}
       alt={tags}
+      className={styles.ImageGalleryItemImage}
     />
   </li>
 );

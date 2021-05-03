@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
 import styles from "./Modal.module.css";
 
-const Modal = ({ children, activeModal }) => {
+const Modal = ({ children, toggleModal }) => {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.code === "Escape") {
-        activeModal();
+        toggleModal();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [activeModal]);
+  }, [toggleModal]);
 
   const handleBackdropClick = (event) => {
     if (event.currentTarget === event.target) {
-      activeModal();
+      toggleModal();
     }
   };
 

@@ -5,7 +5,7 @@ const Loader = () => {
   return (
     <>
       <Spinner
-        type="Puff"
+        type="Grid"
         color="#00BFFF"
         height={200}
         width={200}
