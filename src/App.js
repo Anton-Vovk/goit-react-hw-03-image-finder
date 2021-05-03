@@ -51,7 +51,7 @@ class App extends Component {
   onSubmit = (quary) => {
     this.setState({ searchQuary: quary, currentPage: 1, images: [] });
   };
-  toggleModal = (image) => {
+  activeModal = (image) => {
     this.setState((prevState) => ({
       showModal: !prevState.showModal,
       selectedImage: image,
@@ -65,7 +65,7 @@ class App extends Component {
         <Searchbar onSubmit={this.onSubmit}></Searchbar>
         {error && <h2>Something wrong!!!</h2>}
         {showModal && (
-          <Modal toggleModal={this.toggleModal}>
+          <Modal activeModal={this.activeModal}>
             <img src={selectedImage.largeImageURL} alt={selectedImage.tags} />
           </Modal>
         )}
@@ -73,7 +73,7 @@ class App extends Component {
           <Loader />
         ) : (
           <ImageGallery
-            toggleModal={this.toggleModal}
+            activeModal={this.activeModal}
             showModal={showModal}
             images={images}
           ></ImageGallery>
