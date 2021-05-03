@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
+import api from './services/api';
+import styles from './App.module.css';
 import Button from './components/Button/Button';
 import Searchbar from './components/Searchbar/Searchbar';
 import Loader from './components/Loader/Loader';
 import ImageGallery from './components/ImageGallery/ImageGallery';
-import api from './services/api';
 import Modal from './components/Modal/Modal';
-import styles from './App.module.css';
 
 class App extends Component {
   state = {
     images: [],
-    searchQuary: "",
-    currentPage: undefined,
+    searchQuary: '',
+    currentPage: 1,
     isLoading: false,
     error: false,
     showModal: false,
-    selectedImage: undefined,
+    selectedImage: null,
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -27,13 +27,13 @@ class App extends Component {
       try {
         this.setState({ isLoading: true });
         const result = await api(searchQuary, currentPage);
-        this.setState((prevState) => ({
+        this.setState(prevState => ({
           images: [...prevState.images, ...result.data.hits],
           isLoading: false,
         }));
         window.scrollTo({
           top: document.documentElement.scrollHeight,
-          behavior: "smooth",
+          behavior: 'smooth',
         });
       } catch {
         this.setState({
@@ -45,14 +45,15 @@ class App extends Component {
   }
 
   loadMore = () => {
-    this.setState((prevState) => ({ currentPage: prevState.currentPage + 1 }));
+    this.setState(prevState => ({ currentPage: prevState.currentPage + 1 }));
   };
 
-  onSubmit = (quary) => {
+  onSubmit = quary => {
     this.setState({ searchQuary: quary, currentPage: 1, images: [] });
   };
-  activeModal = (image) => {
-    this.setState((prevState) => ({
+
+  activeModal = image => {
+    this.setState(prevState => ({
       showModal: !prevState.showModal,
       selectedImage: image,
     }));
@@ -63,7 +64,7 @@ class App extends Component {
     return (
       <div className={styles.App}>
         <Searchbar onSubmit={this.onSubmit}></Searchbar>
-        {error && <h2>Something wrong!!!</h2>}
+        {error && <h2>Oops!</h2>}
         {showModal && (
           <Modal activeModal={this.activeModal}>
             <img src={selectedImage.largeImageURL} alt={selectedImage.tags} />

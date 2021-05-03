@@ -6,9 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  padding: 40px;
   font-size: 24px;
-  padding: 2.25em 1.6875em;
   background-image: -webkit-repeating-radial-gradient(
     center center,
     rgba(0, 0, 0, 0.2),
