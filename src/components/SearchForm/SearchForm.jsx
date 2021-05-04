@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import styles from "./SearchForm.module.css";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import styles from './SearchForm.module.css';
 
 const SearchForm = ({ onSubmit }) => {
-  const [quary, setQuary] = useState("");
+  const [quary, setQuary] = useState('');
 
   const handleOnChange = ({ target: { value } }) => {
     setQuary(value);
@@ -10,7 +11,7 @@ const SearchForm = ({ onSubmit }) => {
 
   return (
     <form
-      onSubmit={(event) => {
+      onSubmit={event => {
         event.preventDefault();
         onSubmit(quary);
       }}
@@ -31,6 +32,10 @@ const SearchForm = ({ onSubmit }) => {
       />
     </form>
   );
+};
+
+SearchForm.propTypes = {
+  onSubmit: PropTypes.func,
 };
 
 export default SearchForm;

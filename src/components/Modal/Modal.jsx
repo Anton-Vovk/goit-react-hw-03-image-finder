@@ -1,20 +1,21 @@
-import React, { useEffect } from "react";
-import styles from "./Modal.module.css";
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import styles from './Modal.module.css';
 
 const Modal = ({ children, activeModal }) => {
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.code === "Escape") {
+    const handleKeyDown = event => {
+      if (event.code === 'Escape') {
         activeModal();
       }
     };
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [activeModal]);
 
-  const handleBackdropClick = (event) => {
+  const handleBackdropClick = event => {
     if (event.currentTarget === event.target) {
       activeModal();
     }
@@ -25,6 +26,11 @@ const Modal = ({ children, activeModal }) => {
       <div className={styles.Modal}>{children}</div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  children: PropTypes.node.isRequired,
+  activeModal: PropTypes.func.isRequired,
 };
 
 export default Modal;

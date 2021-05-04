@@ -1,7 +1,7 @@
-
-import React from "react";
-import SearchForm from "../SearchForm/SearchForm";
-import styles from "./Searchbar.module.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import SearchForm from '../SearchForm/SearchForm';
+import styles from './Searchbar.module.css';
 
 const Searchbar = ({ onSubmit }) => {
   return (
@@ -9,6 +9,10 @@ const Searchbar = ({ onSubmit }) => {
       <SearchForm onSubmit={onSubmit}></SearchForm>
     </header>
   );
+};
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default Searchbar;
